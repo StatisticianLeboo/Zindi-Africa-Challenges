@@ -15,7 +15,6 @@ prioritize outreach by community health workers.
 import streamlit as st
 import pandas as pd
 import numpy as np
-import shap
 import matplotlib.pyplot as plt
 import os
 import subprocess
@@ -28,8 +27,24 @@ except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "joblib", "scikit-learn"])
     import joblib
 
-# Now import joblib
+# try and install shap if not present, but handle the case where it fails (e.g. on Windows)
+try:
+    import shap
+except ImportError:
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "shap"])
+        import shap
+    except Exception as e:
+        st.error(
+            "SHAP library is required for feature explanations but failed to install. "
+            "Explanations will not be available. Error details: "
+            f"{str(e)}"
+        )
+
+# Now import joblib and shap
+import shap
 import joblib
+
 
 # -----------------------------------------------------------------------
 # Page config
