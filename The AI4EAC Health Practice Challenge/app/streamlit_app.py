@@ -15,10 +15,21 @@ prioritize outreach by community health workers.
 import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib
 import shap
 import matplotlib.pyplot as plt
 import os
+import subprocess
+import sys
+
+# Force install joblib and scikit-learn if they aren't present
+try:
+    import joblib
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "joblib", "scikit-learn"])
+    import joblib
+
+# Now import joblib
+import joblib
 
 # -----------------------------------------------------------------------
 # Page config
