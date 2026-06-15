@@ -16,38 +16,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-import subprocess
-import sys
-
-# Force install joblib and scikit-learn if they aren't present
-try:
-    import joblib
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "joblib", "scikit-learn"])
-    import joblib
-
-# try and install shap if not present, but handle the case where it fails (e.g. on Windows)
-try:
-    import shap
-except ImportError:
-    try:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "shap"])
-        import shap
-    except Exception as e:
-        st.error(
-            "SHAP library is required for feature explanations but failed to install. "
-            "Explanations will not be available. Error details: "
-            f"{str(e)}"
-        )
-# try and import matplotlib, install if not present
-try:
-    import matplotlib.pyplot as plt
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
-    import matplotlib.pyplot as plt
-    
-    
-# Now import joblib and shap
+import matplotlib.pyplot as plt
 import shap
 import joblib
 
