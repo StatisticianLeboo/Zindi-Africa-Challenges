@@ -15,7 +15,6 @@ prioritize outreach by community health workers.
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import os
 import subprocess
 import sys
@@ -40,7 +39,14 @@ except ImportError:
             "Explanations will not be available. Error details: "
             f"{str(e)}"
         )
-
+# try and import matplotlib, install if not present
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
+    import matplotlib.pyplot as plt
+    
+    
 # Now import joblib and shap
 import shap
 import joblib
